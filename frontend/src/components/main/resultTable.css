@@ -1,0 +1,46 @@
+.table-check {
+    border: 1px solid #eee;
+    table-layout: fixed;
+    width: 80%;
+    margin: 10px auto 125px auto;
+
+    opacity: 0.8;
+}
+
+.table-check th {
+    font-weight: bold;
+    padding: 5px;
+    background: #efefef;
+    border: 1px solid #dddddd;
+}
+
+.table-check td {
+    padding: 5px 10px;
+    border: 1px solid #eee;
+    text-align: center;
+}
+
+.hit {
+    background-color: green;
+    padding-bottom: 100px;
+}
+
+.miss {
+    background-color: red;
+}
+
+
+@media (max-width: 600px) {
+    .table-check {
+       width: 100%;
+        margin: 10px auto 70px auto;
+    }
+    .table-check th {
+        font-size: 13px;
+    }
+    .table-check td {
+        font-size: 10px;
+        padding: 5px;
+    }
+}
+

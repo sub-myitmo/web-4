@@ -1,0 +1,36 @@
+.graph {
+    display: flex;
+    width: 100%;
+    margin: 50px 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.graph > svg, .graph > form{
+    text-align: center;
+    margin: 10px auto;
+}
+
+.graph > svg {
+    scale: 1.4;
+}
+
+h1 {
+    text-align: center;
+}
+
+@media (max-width: 700px) {
+    .graph {
+        flex-direction: column;
+        margin: 10px auto;
+    }
+    .graph > svg {
+        scale: 1.1;
+    }
+}
+
+@media (max-width: 400px) {
+    .graph > svg {
+        scale: 0.8;
+    }
+}

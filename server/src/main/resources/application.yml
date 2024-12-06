@@ -1,0 +1,19 @@
+my:
+  config:
+    key: 4523e1e79162486571c8ad0fb5c496b528a625bb62c7d9ce6c6f853ca8d90eb3
+
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/web3
+    password: s409331
+    username: s409331
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: false
+
+
