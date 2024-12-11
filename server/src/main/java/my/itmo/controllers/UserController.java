@@ -5,8 +5,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import my.itmo.dto.UserDTO;
-import my.itmo.network.ChangeUsernameRequest;
-import my.itmo.network.ChangeUsernameResponse;
+import my.itmo.network.ChangeDataRequest;
+import my.itmo.network.ChangeProfileDataResponse;
 import my.itmo.services.interfaces.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,10 +18,16 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/change")
-    public ChangeUsernameResponse change(@RequestBody @Valid ChangeUsernameRequest changeRequest) {
+    @PostMapping("/changeUsername")
+    public ChangeProfileDataResponse changeUsername(@RequestBody @Valid ChangeDataRequest changeRequest) {
         log.info("Пришёл запрос на смену username");
         return userService.change(changeRequest);
+    }
+
+    @PostMapping("/changePassword")
+    public ChangeProfileDataResponse changePassword(@RequestBody @Valid ChangeDataRequest changeRequest) {
+        log.info("Пришёл запрос на смену пароля");
+        return userService.changePassword(changeRequest);
     }
 
     @GetMapping(value = "/getProfile")

@@ -2,7 +2,7 @@ import React from 'react';
 
 // css styles
 import './footer.css'
-import img from './favicon.jpg'
+import image from './favicon.jpg'
 
 function Footer() {
 
@@ -11,7 +11,7 @@ function Footer() {
         <footer className="footer fixed-bottom">
             <div>
                 <a href="https://se.ifmo.ru">
-                    <img className="vt" src={img} alt=""/>
+                    <img className="vt" src={image} alt=""/>
                 </a>
             </div>
             <small>

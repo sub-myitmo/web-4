@@ -1,8 +1,6 @@
 package my.itmo.services;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import my.itmo.dto.PointDTO;
 import my.itmo.dto.UserDTO;
 import my.itmo.services.interfaces.AdminService;
 import my.itmo.services.interfaces.UserRepository;
@@ -12,9 +10,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 
-import static java.util.Arrays.stream;
 
-@Slf4j
+
 @Service
 @RequiredArgsConstructor
 public class AdminServiceImpl implements AdminService {

@@ -16,7 +16,7 @@ const XYRForm = () => {
     const [rValid, setRValid] = useState({error: '', success: true})
 
     const tokenFromStore = useSelector(state => state.token.token)
-    //const pointsFromState = useSelector(state => state.token.points)
+    const pointsFromState = useSelector(state => state.token.points)
 
     const dispatch = useDispatch()
 
@@ -50,6 +50,7 @@ const XYRForm = () => {
 
     }
 
+
     return (
         <form className="coordinates">
 
@@ -65,7 +66,7 @@ const XYRForm = () => {
                                }}
                                value={point.x}
                     />
-                    <label className="text-field__label" htmlFor="xInput">X (-5...3)</label>
+                    <label className="text-field__label" htmlFor="xInput">X [-5...3]</label>
                 </div>
                 {xValid.success ? <div/> : <span style={{color: 'red'}}>{xValid.error}</span>}
             </div>
@@ -82,7 +83,7 @@ const XYRForm = () => {
                                }}
                                value={point.y}
                     />
-                    <label className="text-field__label" htmlFor="yInput">Y (-5...3)</label>
+                    <label className="text-field__label" htmlFor="yInput">Y [-5...3]</label>
                 </div>
                 {yValid.success ? <div/> : <span style={{color: 'red'}}>{yValid.error}</span>}
             </div>
@@ -123,7 +124,7 @@ const XYRForm = () => {
             <div className="buttons">
                 <Button onClick={sendPoint}
                         disabled={!xValid.success || !yValid.success || !rValid.success || point.x === '' || point.y === ''}>Отправить</Button>
-                <Button onClick={deletePoints}>Очистить таблицу</Button>
+                <Button onClick={deletePoints} disabled={pointsFromState.length === 0}>Очистить таблицу</Button>
             </div>
 
 

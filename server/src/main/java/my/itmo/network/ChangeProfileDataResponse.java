@@ -1,4 +1,4 @@
 package my.itmo.network;
 
-public record ChangeUsernameResponse(Boolean success) {
+public record ChangeProfileDataResponse(Boolean success) {
 }

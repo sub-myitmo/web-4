@@ -12,9 +12,17 @@ export default class api {
 
 
     static async loginReq(emailOrUsername, password) {
+        return await axios.post(this.path + '/auth/first-login', {
+            emailOrUsername: emailOrUsername,
+            password: password,
+        }).then(res => res.data)
+    }
+
+    static async twoFactorLogin(emailOrUsername, password, code) {
         return await axios.post(this.path + '/auth/login', {
             emailOrUsername: emailOrUsername,
             password: password,
+            code: code
         }).then(res => res.data)
     }
 
@@ -70,8 +78,8 @@ export default class api {
     }
 
     static async changeUsername(username, token) {
-        return axios.post(this.path + '/user/change', {
-            username: username.trim()
+        return axios.post(this.path + '/user/changeUsername', {
+            data: username.trim()
         }, {
             headers: {
                 "Access-Control-Allow-Origin": "*",
@@ -83,6 +91,24 @@ export default class api {
             .catch(function (error) {
                 if (error.response) {
                     return console.debug("Ошибка при смене username! "  + error.response.data.error);
+                }
+            })
+    }
+
+    static async changePassword(password, token) {
+        return axios.post(this.path + '/user/changePassword', {
+            data: password.trim()
+        }, {
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Content-type": "Application/json",
+                "Authorization": "Bearer " + token
+            }
+        })
+            .then(res => res.data)
+            .catch(function (error) {
+                if (error.response) {
+                    return console.debug("Ошибка при смене пароля! "  + error.response.data.error);
                 }
             })
     }

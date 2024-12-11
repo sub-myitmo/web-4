@@ -9,7 +9,6 @@ import api from "../../api";
 import {clearPoints, clearToken, logOut, setEmail, setToken, setUsername} from "../../store/tokenSlice";
 import Cookies from "js-cookie";
 import {useNavigate} from "react-router-dom";
-import Nav from "../nav/Nav";
 
 
 function Profile() {
@@ -25,7 +24,13 @@ function Profile() {
     const [username, setUsername2] = useState('')
     const [usernameInfo, setUsernameInfo] = useState({info: '', success: true})
 
+    const [password, setPassword] = useState('')
+    const [passwordInfo, setPasswordInfo] = useState({info: '', success: true})
+
+
     useEffect(() => {
+        document.title = "Профиль"
+
         const token = Cookies.get('authToken');
         console.debug("token from cookies: " + token)
         if (token) {
@@ -38,7 +43,7 @@ function Profile() {
                     dispatch(setUsername(data.username))
                 })
                 .catch(error => {
-                    console.log('Ошибка при запросе данных о пользователе!')
+                    console.debug('Ошибка при запросе данных о пользователе! ' + error)
                 });
         }
     }, [dispatch])
@@ -68,9 +73,26 @@ function Profile() {
                     setUsernameInfo({info: "Ошибка при отправке username", success: false})
                 })
         } else {
-            setUsernameInfo({info: "Username должен состоять минимум из 5 символов", success: false})
+            setUsernameInfo({info: "Username должен состоять минимум из 5 непустых символов", success: false})
         }
     }
+
+    const changePassword = (e) => {
+        e.preventDefault()
+        if (password.trim().length > 4) {
+            api.changePassword(password.trim(), tokenFromStore)
+                .then(res => {
+                    setPasswordInfo({info: 'Вы успешно сменили пароль на "' + password + '"', success: true});
+                })
+                .catch(e => {
+                    setPasswordInfo({info: "Ошибка при отправке пароля для смены", success: false})
+                })
+        } else {
+            setPasswordInfo({info: "Пароль должен состоять минимум из 5 непустых символов", success: false})
+        }
+    }
+
+
     return (
 
         <main className="profile-container">
@@ -82,25 +104,44 @@ function Profile() {
             </div>
 
             <div className={"change"}>
-                <form className="login-change">
-                    <h3 className="selection-label">Сменить username:</h3>
-                    <div className="text-field text-field_floating-3">
-                        <InputText id="login"
-                                   type="text"
-                                   placeholder={"username"}
-                                   onChange={(e) => {
-                                       setUsername2(e.target.value)
-                                       //setUserValid(validator.isValid(e.target.value, "X"))
-                                   }}
-                                   value={username === null ? '' : username}
-                        />
-                        <label className="text-field__label" htmlFor="login">Username</label>
+                <form className="form-change">
+                    <div className={"in_form_div"}>
+                        <h3 className="selection-label">Сменить username:</h3>
+                        <div className="text-field text-field_floating-3">
+                            <InputText id="login"
+                                       type="text"
+                                       placeholder={"username"}
+                                       onChange={(e) => {
+                                           setUsername2(e.target.value)
+                                       }}
+                                       value={username === null ? '' : username}
+                            />
+                            <label className="text-field__label" htmlFor="login">New username</label>
+                        </div>
+                        <div style={{color: usernameInfo.success ? "green" : "red"}}>{usernameInfo.info}</div>
+                        <Button disabled={username === usernameFromStore || username.length <= 4}
+                                onClick={changeUsername}>Сменить username</Button>
                     </div>
-                    <div style={{color: usernameInfo.success ? "green" : "red"}}>{usernameInfo.info}</div>
-                    <Button disabled={username === usernameFromStore || username.length <= 4}
-                            onClick={changeUsername}>Сменить</Button>
+                    <div className={"in_form_div"}>
+                        <h3 className="selection-label">Сменить пароль:</h3>
+                        <div className="text-field text-field_floating-3">
+                            <InputText id="password"
+                                       type="password"
+                                       placeholder={"New password"}
+                                       onChange={(e) => {
+                                           setPassword(e.target.value)
+                                       }}
+                                       value={password === null ? '' : password}
+                            />
+                            <label className="text-field__label" htmlFor="password">New password</label>
+                        </div>
+                        <div style={{color: passwordInfo.success ? "green" : "red"}}>{passwordInfo.info}</div>
+                        <Button disabled={password.length <= 4}
+                                onClick={changePassword}>Сменить пароль</Button>
 
-                    <Button onClick={logout}>Выйти из аккаунта</Button>
+
+                        <Button onClick={logout}>Выйти из аккаунта</Button>
+                    </div>
                 </form>
             </div>
         </main>

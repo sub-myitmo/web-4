@@ -6,8 +6,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import my.itmo.network.AuthResponse;
 import my.itmo.network.LoginRequest;
+import my.itmo.network.LoginWithTwoFactorRequest;
 import my.itmo.network.RegisterRequest;
+import my.itmo.services.EmailService;
 import my.itmo.services.interfaces.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -18,16 +22,22 @@ public class AuthController {
 
     private final UserService userService;
 
-
     @PostMapping("/register")
     public AuthResponse register(@RequestBody @Valid RegisterRequest regRequest) {
         log.info("Пришёл запрос на register");
+
         return userService.register(regRequest);
     }
 
     @PostMapping("/login")
-    public AuthResponse login(@RequestBody @Valid LoginRequest logRequest) {
+    public AuthResponse login(@RequestBody @Valid LoginWithTwoFactorRequest logRequest) {
         log.info("Пришёл запрос на login");
+        return userService.login(logRequest);
+    }
+
+    @PostMapping("/first-login")
+    public ResponseEntity<?> firstLogin(@RequestBody @Valid LoginRequest logRequest) {
+        log.info("Пришёл запрос на firstLogin");
         return userService.login(logRequest);
     }
 

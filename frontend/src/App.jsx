@@ -32,7 +32,9 @@ function App() {
                 <Route path="/main"
                        element={
                            isAuth ? createPage(<Main/>) : <Navigate to="/"/>
-                       }/>
+                       }
+                       title={"Main"}
+                />
 
                 <Route path="/"
                        element={

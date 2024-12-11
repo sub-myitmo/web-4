@@ -3,6 +3,7 @@ package my.itmo.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -27,8 +28,14 @@ public class User {
     @Column(nullable = false, name = "password")
     private String password;
 
-    @Column(nullable = false, name = "verified")
-    private Boolean isVerified;
+//    @Column(nullable = false, name = "verified")
+//    private Boolean isVerified;
+
+    @Column(name = "secondFactorCode")
+    private String secondFactorCode;
+
+    @Column(name = "timeCode")
+    private Long timeCode;
 
 //    @OneToMany(fetch=FetchType.EAGER)
 //    @JoinColumn(name="user_id")

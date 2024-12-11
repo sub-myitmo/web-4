@@ -3,7 +3,7 @@ import XYRForm from "./XYRForm";
 import MySVG from "./MySVG";
 import ResultsTable from "./ResultsTable";
 import {useDispatch} from "react-redux";
-import {addPoint, authorize, clearPoints, setToken} from "../../store/tokenSlice";
+import {addPoint, clearPoints, setToken} from "../../store/tokenSlice";
 import api from "../../api";
 import Cookies from "js-cookie";
 import './main.css'
@@ -14,6 +14,8 @@ function Main() {
     //const tokenFromStore = useSelector(state => state.token.token)
 
     useEffect(() => {
+        document.title = "Главная"
+
         const token = Cookies.get('authToken');
         console.debug("token from cookies: " + token)
         if (token) {
@@ -27,7 +29,7 @@ function Main() {
                     data.map(point => dispatch(addPoint(point)))
                 })
                 .catch(error => {
-                    console.log('Ошибка при запросе точек!')
+                    console.debug('Ошибка при запросе точек!' + error)
                 });
         }
     }, [dispatch])

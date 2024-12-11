@@ -1,6 +1,6 @@
 my:
   config:
-    key: 4523e1e79162486571c8ad0fb5c496b528a625bb62c7d9ce6c6f853ca8d90eb3
+    key: ${WEB4_CONFIG_KEY}
 
 
 spring:
@@ -15,5 +15,17 @@ spring:
     properties:
       hibernate:
         format_sql: false
+  mail:
+    host: smtp.yandex.ru
+    port: 587
+    username: ${WEB4_EMAIL}
+    password: ${WEB4_EMAIL_PASS}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
 
 

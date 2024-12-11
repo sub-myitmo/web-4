@@ -82,9 +82,7 @@ button:disabled {
 .text-field_floating-3 .text-field__input {
     border: none;
     border-bottom: 1px solid #bdbdbd;
-    border-radius: 0;
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
+    border-radius: 0.25rem 0.25rem 0 0;
     height: calc(3.5rem + 2px);
     line-height: 1.25;
     padding: 1rem 0.75rem;
@@ -129,4 +127,98 @@ button:disabled {
 .text-field_floating-3 .text-field__input:not(:placeholder-shown)~.text-field__label {
     transform: scale(.85) translateY(-.75rem) translateX(.15rem);
     color: #03a9f4;
+}
+
+
+.two-factor-input {
+    display: block;
+    max-width: 150px;
+    padding: 12px 15px;
+    font-size: 30px;
+    border: 1px solid #939393;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+    margin: 10px auto;
+    text-align: center;
+    background-color: #c1aaf1;
+}
+
+.two-factor-input:focus {
+    border-color: #512da8; /* Цвет рамки при фокусе */
+    outline: none; /* Убираем стандартный контур */
+}
+
+
+
+/* Стили для подложки */
+
+.overlay {
+
+    /* Скрываем подложку  */
+    opacity: 1;
+    visibility: visible;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 110;
+    transition: .3s all;
+}
+
+/* Стили для модальных окон */
+
+#two_factor {
+
+    /* Скрываем окна  */
+    opacity: 1;
+    visibility: visible;
+
+
+    /*  Установаем ширину окна  */
+    width: 100%;
+    max-width: 500px;
+
+    /*  Центрируем и задаем z-index */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 120; /* Должен быть выше чем у подложки*/
+
+    /*  Побочные стили   */
+    box-shadow: 0 3px 10px -.5px rgba(0, 0, 0, .2);
+    text-align: center;
+    padding: 30px;
+    border-radius: 3px;
+    background-color: #fff;
+    transition: 0.3s all;
+}
+
+.hidden-code {
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+}
+
+#close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 16px;
+    fill: #444;
+    cursor: pointer;
+
+    color: #512da8;
+    background-color: white;
+    padding: 10px;
+    text-align: center;
+    margin: 0;
+}
+
+.two-factor-label {
+    padding: 10px;
+    display: block;
 }
