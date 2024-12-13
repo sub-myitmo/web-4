@@ -8,9 +8,7 @@ import my.itmo.network.AuthResponse;
 import my.itmo.network.LoginRequest;
 import my.itmo.network.LoginWithTwoFactorRequest;
 import my.itmo.network.RegisterRequest;
-import my.itmo.services.EmailService;
 import my.itmo.services.interfaces.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +27,11 @@ public class AuthController {
         return userService.register(regRequest);
     }
 
+    @GetMapping("/hello")
+    public ResponseEntity<String> hello() {
+        return ResponseEntity.ok("Resource found");
+    }
+
     @PostMapping("/login")
     public AuthResponse login(@RequestBody @Valid LoginWithTwoFactorRequest logRequest) {
         log.info("Пришёл запрос на login");
@@ -36,7 +39,7 @@ public class AuthController {
     }
 
     @PostMapping("/first-login")
-    public ResponseEntity<?> firstLogin(@RequestBody @Valid LoginRequest logRequest) {
+    public String firstLogin(@RequestBody @Valid LoginRequest logRequest) {
         log.info("Пришёл запрос на firstLogin");
         return userService.login(logRequest);
     }

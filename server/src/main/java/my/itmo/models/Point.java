@@ -51,7 +51,7 @@ public class Point {
 
     private boolean checkPoint() {
         return (x > 0 && y >= 0 && (y <= r / 2 - 0.5 * x)) ||
-                (x < 0 && y <= 0 && (Math.sqrt(x * x + y * y) <= r)) ||
+                (x <= 0 && y <= 0 && (Math.sqrt(x * x + y * y) <= r)) ||
                 (x <= 0 && y >= 0 && (x >= -r) && (y <= r));
     }
 }

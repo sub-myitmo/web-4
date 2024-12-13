@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "my.itmo"
-version = "serverWEB"
+version = "app"
 
 configurations {
     compileOnly {
@@ -27,6 +27,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-mail")
     implementation("jakarta.enterprise:jakarta.enterprise.cdi-api:3.0.0")
+
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("org.postgresql:postgresql")
 

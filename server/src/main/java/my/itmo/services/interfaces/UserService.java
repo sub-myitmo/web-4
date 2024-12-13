@@ -13,7 +13,7 @@ public interface UserService {
 
     ChangeProfileDataResponse changePassword(ChangeDataRequest changeRequest);
 
-    ResponseEntity<?> login(LoginRequest logRequest);
+    String login(LoginRequest logRequest);
 
     AuthResponse login(LoginWithTwoFactorRequest logRequest);
 

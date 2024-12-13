@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default class api {
-    static path = 'http://localhost:8080'
+    static path = process.env.MY_VARIABLE; // например 'http://localhost:8080'
 
     static async registerReq(email, password) {
         return await axios.post(api.path + "/auth/register", {

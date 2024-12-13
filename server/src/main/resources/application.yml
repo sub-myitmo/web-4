@@ -1,13 +1,18 @@
 my:
   config:
-    key: ${WEB4_CONFIG_KEY}
+    key: ${SECRET_KEY}
 
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: mappings
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/web3
-    password: s409331
-    username: s409331
+    url: ${SPRING_DATASOURCE_URL}
+    password: ${SPRING_DATASOURCE_USERNAME}
+    username: ${SPRING_DATASOURCE_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: update
@@ -16,12 +21,13 @@ spring:
       hibernate:
         format_sql: false
   mail:
-    host: smtp.yandex.ru
-    port: 587
-    username: ${WEB4_EMAIL}
-    password: ${WEB4_EMAIL_PASS}
+    host: ${EMAIL_HOST}
+    port: ${EMAIL_PORT}
+    username: ${EMAIL}
+    password: ${EMAIL_PASSWORD}
     properties:
       mail:
+        debug: true
         smtp:
           auth: true
           starttls:

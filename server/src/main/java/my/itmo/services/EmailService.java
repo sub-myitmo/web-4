@@ -19,12 +19,15 @@ public class EmailService {
         log.info("Sending confirmation email to {}", toEmail);
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(sender);
-
+        log.info("log1");
         message.setTo(toEmail);
         message.setSubject(subject);
         message.setText(body);
+        log.info("log2");
+
         try {
             mailSender.send(message);
+            log.info("log3");
             //log.info("Sending confirmation email to {}", toEmail);
         } catch (Exception e) {log.error("error while sending confirmation email to {}", toEmail, e);}
     }

@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  tomcat:
+    image: tomcat:latest
+    environment:
+      EMAIL_HOST: your_data
+      EMAIL_PORT: your_data
+      EMAIL: your_data
+      EMAIL_PASSWORD: your_data
+      SPRING_DATASOURCE_URL: your_data
+      SPRING_DATASOURCE_USERNAME: your_data
+      SPRING_DATASOURCE_PASSWORD: your_data
+      SECRET_KEY: your_data
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./build/libs/server-app.war:/usr/local/tomcat/webapps/server-app.war
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: your_data
+      POSTGRES_USER: your_data
+      POSTGRES_PASSWORD: your_data
+    ports:
+      - "5431:5431"

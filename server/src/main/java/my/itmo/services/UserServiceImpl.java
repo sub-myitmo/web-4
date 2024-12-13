@@ -100,7 +100,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity<?> login(LoginRequest logRequest) {
+    public String login(LoginRequest logRequest) {
         Optional<User> try_user = userRepository.findByEmail(logRequest.emailOrUsername());
         User user;
         if (try_user.isEmpty()) {
@@ -119,7 +119,7 @@ public class UserServiceImpl implements UserService {
 
         emailService.sendConfirmationEmail(user.getEmail(), "Двух-факторная аутентификация", "Ваш код: " + code + "\nБудьте внимательны, он действует только 1 минуту!");
 
-        return ResponseEntity.ok("check two-factor");
+        return "check two-factor";
     }
 
     @Override
